@@ -17,17 +17,17 @@ function [K, S1, S2, A, B, C, D, E] = construct_K(n0, m0, p0)
     E = randn(p);
     
     % Ensure D + BA^(-1)B^T is invertible
-    S1 = -(D + B / A * B');
+    S1 = D + B / A * B'; % positive-definite version
     while det(S1) == 0
         D = randn(m);
-        S1 = -(D + B / A * B');
+        S1 = D + B / A * B';
     end
 
     % Ensure -E + CS1^(-1)C^T is invertible
-    S2 = -(-E + C / S1 * C');
+    S2 = E + C / S1 * C';
     while det(S2) == 0
         E = randn(p);
-        S2 = -(-E + C / S1 * C');
+        S2 = E + C / S1 * C';
     end
 
     % Construct the zero matrices
