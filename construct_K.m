@@ -23,7 +23,7 @@ function [K, S1, S2, A, B, C, D, E] = construct_K(n0, m0, p0)
         S1 = D + B / A * B';
     end
 
-    % Ensure -E + CS1^(-1)C^T is invertible
+    % Ensure E + CS1^(-1)C^T is invertible
     S2 = E + C / S1 * C';
     while det(S2) == 0
         E = randn(p);
